@@ -9,12 +9,18 @@ Function Print-Barcode ([int] $_h, [string] $_b){
     $_b = (" "*$spaces) + $_b + (" "*$spaces)
 
     #print
-    Write-Host (" "*($_b.Length)) -ForegroundColor Black -BackgroundColor White
+    $fg = $host.ui.RawUI.ForegroundColor
+    $bg = $host.ui.RawUI.BackgroundColor
+    $host.ui.RawUI.ForegroundColor = "Black"
+    $host.ui.RawUI.BackgroundColor = "White"
+    Write-Output (" "*($_b.Length)) #-ForegroundColor "Black" -BackgroundColor "White"
     for ($i=0;$i -le $_h;$i++)
     {
-      Write-Host $_b -ForegroundColor Black -BackgroundColor White
+      Write-Output $_b #-ForegroundColor "Black" -BackgroundColor "White"
     }
-    Write-Host (" "*($_b.Length)) -ForegroundColor Black -BackgroundColor White
+    Write-Output (" "*($_b.Length)) #-ForegroundColor "Black" -BackgroundColor "White"
+    $host.ui.RawUI.ForegroundColor = $fg
+    $host.ui.RawUI.BackgroundColor = $bg
 }
 
 Function Text-Converter ([string] $_text){
